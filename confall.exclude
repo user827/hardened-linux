@@ -1,0 +1,25 @@
+# confall is from ~/src/kconfig-hardened-check/bin/kconfig-hardened-check -p X86_64
+# this is what is ecluded from there
+
+# These were set but don't take them
+# CONFIG_USER_NS is not set # for steam
+# CONFIG_MODULES is not set
+# CONFIG_FB is not set
+# CONFIG_VT is not set
+# CONFIG_AIO is not set
+# CONFIG_MAGIC_SYSRQ is not set
+# CONFIG_IA32_EMULATION is not set
+# CONFIG_GCC_PLUGIN_RANDSTRUCT_PERFORMANCE is not set
+# CONFIG_DEVKMEM
+CONFIG_STATIC_USERMODEHELPER=y
+# CONFIG_KALLSYMS is not set
+
+# want for wine
+# CONFIG_BINFMT_MISC is not set
+
+# exclude from confksp:
+# Want to see the errors:
+CONFIG_PANIC_TIMEOUT=-1
+
+# does not build
+CONFIG_WERROR=y

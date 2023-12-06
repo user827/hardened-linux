@@ -1,0 +1,8 @@
+# CONFIG_HARDENED_USERCOPY_FALLBACK is not set
+# CONFIG_HARDENED_USERCOPY_PAGESPAN is not set
+# CONFIG_SECURITY_SELINUX_DISABLE is not set
+# CONFIG_X86_X32 is not set
+# CONFIG_MODIFY_LDT_SYSCALL is not set
+# CONFIG_UBSAN_UNREACHABLE is not set
+error for ../confksp
+validation failed

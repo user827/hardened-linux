@@ -1,6 +1,6 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
-pkgbase=linux
+pkgbase=linux-my
 pkgver=6.6.4.arch1
 pkgrel=1
 pkgdesc='Linux'
@@ -31,6 +31,11 @@ source=(
   https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.{xz,sign}
   $url/releases/download/$_srctag/linux-$_srctag.patch.zst{,.sig}
   config  # the main kernel config file
+  checkconf.sh
+  confksp
+  confmyv2
+  unsettable.grep
+  "kconfig-hardened-check::git+https://github.com/a13xp0p0v/kconfig-hardened-check"
 )
 validpgpkeys=(
   ABAF11C65A2970B130ABE3C479BE3E4300411886  # Linus Torvalds
@@ -42,12 +47,22 @@ sha256sums=('49e49660c93d8d6d58f118360d3ca8131695ec34669263ca8f041c876da93e45'
             'SKIP'
             'fbf89c61fdbef2af00ebbdc6c7019e41e426c9f84dce4fc0005cb0e681f0fff0'
             'SKIP'
-            'f77aab33af83c635e0445c6e424922cdc054efe2430c8c831f8bead23e08ba88')
+            'f77aab33af83c635e0445c6e424922cdc054efe2430c8c831f8bead23e08ba88'
+            '9b9eabd24b97c51c97431f22c2c403c5047ab1c67f6484ee0a4abb0fc01ebd45'
+            '2b41ed7f11992bcd7df902c095e964dc952b8a422200af9ecba607e4de83f63a'
+            'c719210a051aeca346f86eaf8a90addedb1768cff55308a724cf53908b2a4c7e'
+            '4717a44f4b66c9f650a3da0db85a86886b436d5788a39c48a7a5f5fe2eb94704'
+            'SKIP')
 b2sums=('75f20de7474f45966a32f7a1e5f9beadb2b4e111fe9c0ab769ccaa203e798f1a1b0ee05c3cb14de6bb609e2e9df1e238deeadfc21dbf08c6b407c9530bac11ef'
         'SKIP'
         'f402bb9a5530ff36c888f8c08f923a3b049a63bf3125e6a091c5afdb4b6af4260d7b067a24855c86018966fb59e931f4e5f77b975261d9531ff8c1b885ed9279'
         'SKIP'
-        'eee80b262d447770f89bb16e4c84a5faedd8e2a46d57a5b6ad6371f5a9a8e11194f82c9160d78486fc1a889ad9dea6f0b2d90b8a21235aefc30bf7fe3ef355f6')
+        'eee80b262d447770f89bb16e4c84a5faedd8e2a46d57a5b6ad6371f5a9a8e11194f82c9160d78486fc1a889ad9dea6f0b2d90b8a21235aefc30bf7fe3ef355f6'
+        'f04fc16e00b49d645351646f2182f13e27a77252112c0f08ecfa7d8435e84e3927e8093fcc7fbcbbb8dd59e264a731e387a79ced5e365213cbdcef9ec312c6c9'
+        'ee2f4441f205c86da87c7151712393d64527636fccff1689188469776e40f3b2c3c6457d8d91e2aa72266e7da4d94e129a9fb5ea77ab1f06d55a0e0643b65b0a'
+        'aea8de23358aa53a96439f35ec240f340c342a0ddcf475cc154a934553a6b162fc57b55c75e9e04efacd8b07ecb93cdcbc846c198cb886cd454f78bb92ff1491'
+        'eb0a097612593f6f09b139d235f3b9aeb76e3b0fc468f389750a1794ad3f274cddd6d391c37927433ecff660262d958bd7f9b2adb39c86e3c6ca4544a697dd5b'
+        'SKIP')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -75,14 +90,26 @@ prepare() {
   make olddefconfig
   diff -u ../config .config || :
 
+  echo "merging configs"
+  scripts/kconfig/merge_config.sh .config ../confksp ../confmyv2
   make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
 }
 
 build() {
   cd $_srcname
+  tmp=$(mktemp)
+  bash ../checkconf.sh .config ../confksp ../confmyv2 > "$tmp" || true
+  if ! failures=$(diff "$tmp" ../unsettable.grep); then
+    rm "$tmp"
+    echo "Grep failures differ:"
+    echo "diff $tmp ../unsettable.grep"
+    echo "$failures" >&2
+    exit 1
+  fi
+  ../kconfig-hardened-check/bin/kernel-hardening-checker -c .config -m show_fail
+
   make all
-  make htmldocs
 }
 
 _package() {
@@ -143,7 +170,7 @@ _package-headers() {
   install -Dt "$builddir/tools/objtool" tools/objtool/objtool
 
   # required when DEBUG_INFO_BTF_MODULES is enabled
-  install -Dt "$builddir/tools/bpf/resolve_btfids" tools/bpf/resolve_btfids/resolve_btfids
+  #install -Dt "$builddir/tools/bpf/resolve_btfids" tools/bpf/resolve_btfids/resolve_btfids
 
   echo "Installing headers..."
   cp -t "$builddir" -a include
@@ -207,29 +234,9 @@ _package-headers() {
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-_package-docs() {
-  pkgdesc="Documentation for the $pkgdesc kernel"
-
-  cd $_srcname
-  local builddir="$pkgdir/usr/lib/modules/$(<version)/build"
-
-  echo "Installing documentation..."
-  local src dst
-  while read -rd '' src; do
-    dst="${src#Documentation/}"
-    dst="$builddir/Documentation/${dst#output/}"
-    install -Dm644 "$src" "$dst"
-  done < <(find Documentation -name '.*' -prune -o ! -type d -print0)
-
-  echo "Adding symlink..."
-  mkdir -p "$pkgdir/usr/share/doc"
-  ln -sr "$builddir/Documentation" "$pkgdir/usr/share/doc/$pkgbase"
-}
-
 pkgname=(
   "$pkgbase"
   "$pkgbase-headers"
-  "$pkgbase-docs"
 )
 for _p in "${pkgname[@]}"; do
   eval "package_$_p() {
