@@ -32,9 +32,7 @@ source=(
   $url/releases/download/$_srctag/linux-$_srctag.patch.zst{,.sig}
   config  # the main kernel config file
   checkconf.sh
-  confksp
-  confmyv2
-  unsettable.grep
+  confminimal
   "kconfig-hardened-check::git+https://github.com/a13xp0p0v/kconfig-hardened-check"
 )
 validpgpkeys=(
@@ -91,22 +89,14 @@ prepare() {
   diff -u ../config .config || :
 
   echo "merging configs"
-  scripts/kconfig/merge_config.sh .config ../confksp ../confmyv2
+  scripts/kconfig/merge_config.sh .config ../confminimal
   make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
 }
 
 build() {
   cd $_srcname
-  tmp=$(mktemp)
-  bash ../checkconf.sh .config ../confksp ../confmyv2 > "$tmp" || true
-  if ! failures=$(diff "$tmp" ../unsettable.grep); then
-    rm "$tmp"
-    echo "Grep failures differ:"
-    echo "diff $tmp ../unsettable.grep"
-    echo "$failures" >&2
-    exit 1
-  fi
+  bash ../checkconf.sh .config ../confminimal
   ../kconfig-hardened-check/bin/kernel-hardening-checker -c .config -m show_fail
 
   make all

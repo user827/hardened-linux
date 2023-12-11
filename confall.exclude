@@ -1,6 +1,3 @@
-# confall is from ~/src/kconfig-hardened-check/bin/kconfig-hardened-check -p X86_64
-# this is what is ecluded from there
-
 # These were set but don't take them
 # CONFIG_USER_NS is not set # for steam
 # CONFIG_MODULES is not set
