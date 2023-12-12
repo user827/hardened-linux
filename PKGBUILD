@@ -2,7 +2,7 @@
 
 pkgbase=linux-my
 pkgver=6.6.5.arch1
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
 arch=(x86_64)
@@ -47,7 +47,7 @@ sha256sums=('7c92795854a68d218c576097d50611f8eea86fd55810e0bc27724f020753b19e'
             'SKIP'
             'f77aab33af83c635e0445c6e424922cdc054efe2430c8c831f8bead23e08ba88'
             '9b9eabd24b97c51c97431f22c2c403c5047ab1c67f6484ee0a4abb0fc01ebd45'
-            '59cef01ff18d06a0465574a286e53a2597a5430dfc21a5b9969667059eba7f90'
+            '849ce38ed32a325f66c9246bb311a9d1e9e8832d3e3f33a81504e005583930a4'
             'SKIP')
 b2sums=('9d66d720f2f037cfd480835ab38807fe5aabcff09bd210c5cb0dc80bd3e1182434df9f04a286df4e8cbc508ac984ecba12d2098a3296e3aac60afad94c085876'
         'SKIP'
@@ -55,7 +55,7 @@ b2sums=('9d66d720f2f037cfd480835ab38807fe5aabcff09bd210c5cb0dc80bd3e1182434df9f0
         'SKIP'
         'eee80b262d447770f89bb16e4c84a5faedd8e2a46d57a5b6ad6371f5a9a8e11194f82c9160d78486fc1a889ad9dea6f0b2d90b8a21235aefc30bf7fe3ef355f6'
         'f04fc16e00b49d645351646f2182f13e27a77252112c0f08ecfa7d8435e84e3927e8093fcc7fbcbbb8dd59e264a731e387a79ced5e365213cbdcef9ec312c6c9'
-        '33f06ad33c2e2560cfa5e01f066361416709a7be8586e4865b3c9d8f8728c027d1fa73c57180ec8b3b420104b30134d6b90033b0c85234aea25735c1db5c8a38'
+        '7d16d9f9557ceda3a336c045dabc201abc24a274df305c5a72f966043a5855a23169c0afd62e7befa30715ffe29b6c9dfd5ba53c5e1fb01d39ed06aea8cb803b'
         'SKIP')
 
 export KBUILD_BUILD_HOST=archlinux
