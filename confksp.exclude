@@ -1,2 +1,0 @@
-# CONFIG_BINFMT_MISC is not set
-CONFIG_UBSAN_TRAP=y

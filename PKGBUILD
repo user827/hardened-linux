@@ -1,6 +1,6 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
-pkgbase=linux-my
+pkgbase=linux-hardened
 pkgver=6.6.6.arch1
 pkgrel=1
 pkgdesc='Linux'
@@ -33,7 +33,7 @@ source=(
   config  # the main kernel config file
   unsettables
   checkconf.sh
-  confminimal
+  confkspp
   "kconfig-hardened-check::git+https://github.com/a13xp0p0v/kconfig-hardened-check"
 )
 validpgpkeys=(
@@ -48,7 +48,7 @@ sha256sums=('ebf70a917934b13169e1be5b95c3b6c2fea5bc14e6dc144f1efb8a0016b224c8'
             'SKIP'
             'f77aab33af83c635e0445c6e424922cdc054efe2430c8c831f8bead23e08ba88'
             'be2276fdfdca3c91922d35490aac37bac3d8ce428803f6d2840852643ebe3402'
-            '1e5295d9c63104020881c3552a0e167a38c6d280b45a5fde22365bca1e22da70'
+            '0849844663fdedec11a93bd2a30e0639fb26d28eb2135f7527829aad8441e109'
             '1fc63026ce1db04adfcb532a16f4f038526767f348bfd562bc365570cf5d4c6d'
             'SKIP')
 b2sums=('aef38e65d2bcccabb6d96691f96e5c0b3961e4e6125a33feb7ee99cd95c480984e35cc1e72bfa8da60ca76a40744054b8817012f6ebf85fc66161b802be73fb6'
@@ -57,7 +57,7 @@ b2sums=('aef38e65d2bcccabb6d96691f96e5c0b3961e4e6125a33feb7ee99cd95c480984e35cc1
         'SKIP'
         'eee80b262d447770f89bb16e4c84a5faedd8e2a46d57a5b6ad6371f5a9a8e11194f82c9160d78486fc1a889ad9dea6f0b2d90b8a21235aefc30bf7fe3ef355f6'
         '945533780eb99c6632431c8aa7abc92611e34a4a8e872e87beebc7f1b9d64f7e58770d83f99cd8bde3d416e68a0a030a6bf39f6b2579ef068cb2f665a1a50626'
-        '690490d558a3382f6b0b81dd85a8719dddc190b3226278402b8df75f7fb6811bb0227dfe833e59373a00d82f5962c40ed83918dc439e0e90ca783eaae14bb9c0'
+        '55457aecd7c4330899857d3734de945eed040449f70b2ec2f42ae844b570b40609c07f5e22dcaddabf42d382eb8edcba33abe2309138f465caa1dec7785f6cb3'
         '053c6cf8cf1e47b1ded9c772da0a823142b692279f80b8e3de3764b60124e804404379f56a21ddfcfa97b289ab069ecaaf1c3205fa92413e74bb7d20e5ef5fff'
         'SKIP')
 
@@ -88,7 +88,7 @@ prepare() {
   diff -u ../config .config || :
 
   echo "merging configs"
-  scripts/kconfig/merge_config.sh .config ../confminimal
+  scripts/kconfig/merge_config.sh .config ../confkspp
   make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
 }
@@ -96,15 +96,15 @@ prepare() {
 build() {
   cd $_srcname
   tmp=$(mktemp)
-  bash ../checkconf.sh .config ../confminimal > "$tmp" 2>/dev/null || true
-  newunsettables=$(comm -23 <(sort "$tmp") <(sort ../unsettables))
+  bash ../checkconf.sh .config ../confkspp > "$tmp" 2>/dev/null || true
+  newunsettables=$(comm -23 <(sort -u "$tmp") <(sort ../unsettables))
   rm "$tmp"
   if [ -n "$newunsettables" ]; then
     echo "New unsettables:"
     echo "$newunsettables" >&2
     exit 1
   fi
-  ../kconfig-hardened-check/bin/kernel-hardening-checker -c .config -m show_fail
+  ../kconfig-hardened-check/bin/kernel-hardening-checker -c .config -m show_fail | tee hardened_fails
 
   make all
 }
