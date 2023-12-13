@@ -31,6 +31,7 @@ source=(
   https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.{xz,sign}
   $url/releases/download/$_srctag/linux-$_srctag.patch.zst{,.sig}
   config  # the main kernel config file
+  unsettable.grep
   checkconf.sh
   confminimal
   "kconfig-hardened-check::git+https://github.com/a13xp0p0v/kconfig-hardened-check"
@@ -46,6 +47,7 @@ sha256sums=('7c92795854a68d218c576097d50611f8eea86fd55810e0bc27724f020753b19e'
             '496b3865c6ea13c8e4b264152d78ad96002006b56269f81cd29df9d7e90e9540'
             'SKIP'
             'f77aab33af83c635e0445c6e424922cdc054efe2430c8c831f8bead23e08ba88'
+            '96342398e5c97c1ac010e2d6cd220b43270b5a39fd72e6272e064f5d1e0ee03c'
             '9b9eabd24b97c51c97431f22c2c403c5047ab1c67f6484ee0a4abb0fc01ebd45'
             '849ce38ed32a325f66c9246bb311a9d1e9e8832d3e3f33a81504e005583930a4'
             'SKIP')
@@ -54,6 +56,7 @@ b2sums=('9d66d720f2f037cfd480835ab38807fe5aabcff09bd210c5cb0dc80bd3e1182434df9f0
         'f1059b35e1a4667f7e53196521793fcf52c9fc17b1404f97877202520aaceee8f2991f3c2f2a8c6719c129439d592cc663638d055c250a399aeb0cf8a0a2c7ab'
         'SKIP'
         'eee80b262d447770f89bb16e4c84a5faedd8e2a46d57a5b6ad6371f5a9a8e11194f82c9160d78486fc1a889ad9dea6f0b2d90b8a21235aefc30bf7fe3ef355f6'
+        'eaf763a4a015c9c6e522610510e7d3e93bb8f784e933d00e6e5c55220a9b9fb8ef1e37ea3ee803d69b458f8b0e77cb17385ead7d27adb57ad1579254b3e3b0a2'
         'f04fc16e00b49d645351646f2182f13e27a77252112c0f08ecfa7d8435e84e3927e8093fcc7fbcbbb8dd59e264a731e387a79ced5e365213cbdcef9ec312c6c9'
         '7d16d9f9557ceda3a336c045dabc201abc24a274df305c5a72f966043a5855a23169c0afd62e7befa30715ffe29b6c9dfd5ba53c5e1fb01d39ed06aea8cb803b'
         'SKIP')
@@ -92,7 +95,16 @@ prepare() {
 
 build() {
   cd $_srcname
-  bash ../checkconf.sh .config ../confminimal || echo "WARNING"
+  tmp=$(mktemp)
+  bash ../checkconf.sh .config ../confminimal > "$tmp" || true
+  newunsettables=$(comm -23 <(sort "$tmp") <(sort ../unsettable.grep))
+  rm "$tmp"
+  if [ -n "$newunsettables" ]; then
+    echo "New unsettables:"
+    echo "$newunsettables" >&2
+    exit 1
+  fi
+  rm "$tmp"
   ../kconfig-hardened-check/bin/kernel-hardening-checker -c .config -m show_fail
 
   make all
