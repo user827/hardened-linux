@@ -31,7 +31,7 @@ source=(
   https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.{xz,sign}
   $url/releases/download/$_srctag/linux-$_srctag.patch.zst{,.sig}
   config  # the main kernel config file
-  unsettable.grep
+  unsettables
   checkconf.sh
   confminimal
   "kconfig-hardened-check::git+https://github.com/a13xp0p0v/kconfig-hardened-check"
@@ -47,18 +47,18 @@ sha256sums=('ebf70a917934b13169e1be5b95c3b6c2fea5bc14e6dc144f1efb8a0016b224c8'
             '7805a8790008c2c926c346fef0c5c1134a9de13ef4ed43a22d7cad19aa57f56e'
             'SKIP'
             'f77aab33af83c635e0445c6e424922cdc054efe2430c8c831f8bead23e08ba88'
-            '96342398e5c97c1ac010e2d6cd220b43270b5a39fd72e6272e064f5d1e0ee03c'
-            '9b9eabd24b97c51c97431f22c2c403c5047ab1c67f6484ee0a4abb0fc01ebd45'
-            '849ce38ed32a325f66c9246bb311a9d1e9e8832d3e3f33a81504e005583930a4'
+            'be2276fdfdca3c91922d35490aac37bac3d8ce428803f6d2840852643ebe3402'
+            '1e5295d9c63104020881c3552a0e167a38c6d280b45a5fde22365bca1e22da70'
+            '1fc63026ce1db04adfcb532a16f4f038526767f348bfd562bc365570cf5d4c6d'
             'SKIP')
 b2sums=('aef38e65d2bcccabb6d96691f96e5c0b3961e4e6125a33feb7ee99cd95c480984e35cc1e72bfa8da60ca76a40744054b8817012f6ebf85fc66161b802be73fb6'
         'SKIP'
         'dcc63f231fa40165e2a55b916336837648896c3b7503cf1883d131c48ca9b49c9107324aea34ae44ca706da27a0d668abb82e75329cc69270a1ac008f0b5ec6c'
         'SKIP'
         'eee80b262d447770f89bb16e4c84a5faedd8e2a46d57a5b6ad6371f5a9a8e11194f82c9160d78486fc1a889ad9dea6f0b2d90b8a21235aefc30bf7fe3ef355f6'
-        'eaf763a4a015c9c6e522610510e7d3e93bb8f784e933d00e6e5c55220a9b9fb8ef1e37ea3ee803d69b458f8b0e77cb17385ead7d27adb57ad1579254b3e3b0a2'
-        'f04fc16e00b49d645351646f2182f13e27a77252112c0f08ecfa7d8435e84e3927e8093fcc7fbcbbb8dd59e264a731e387a79ced5e365213cbdcef9ec312c6c9'
-        '7d16d9f9557ceda3a336c045dabc201abc24a274df305c5a72f966043a5855a23169c0afd62e7befa30715ffe29b6c9dfd5ba53c5e1fb01d39ed06aea8cb803b'
+        '945533780eb99c6632431c8aa7abc92611e34a4a8e872e87beebc7f1b9d64f7e58770d83f99cd8bde3d416e68a0a030a6bf39f6b2579ef068cb2f665a1a50626'
+        '690490d558a3382f6b0b81dd85a8719dddc190b3226278402b8df75f7fb6811bb0227dfe833e59373a00d82f5962c40ed83918dc439e0e90ca783eaae14bb9c0'
+        '053c6cf8cf1e47b1ded9c772da0a823142b692279f80b8e3de3764b60124e804404379f56a21ddfcfa97b289ab069ecaaf1c3205fa92413e74bb7d20e5ef5fff'
         'SKIP')
 
 export KBUILD_BUILD_HOST=archlinux
@@ -96,15 +96,14 @@ prepare() {
 build() {
   cd $_srcname
   tmp=$(mktemp)
-  bash ../checkconf.sh .config ../confminimal > "$tmp" || true
-  newunsettables=$(comm -23 <(sort "$tmp") <(sort ../unsettable.grep))
+  bash ../checkconf.sh .config ../confminimal > "$tmp" 2>/dev/null || true
+  newunsettables=$(comm -23 <(sort "$tmp") <(sort ../unsettables))
   rm "$tmp"
   if [ -n "$newunsettables" ]; then
     echo "New unsettables:"
     echo "$newunsettables" >&2
     exit 1
   fi
-  rm "$tmp"
   ../kconfig-hardened-check/bin/kernel-hardening-checker -c .config -m show_fail
 
   make all

@@ -3,7 +3,7 @@ set -eu
 
 errofu() {
   if [ $? != 0 ]; then
-    echo validation failed
+    echo validation failed >&2
   fi
 }
 
@@ -18,7 +18,7 @@ ret=0
 for conf; do
   # list items that are in conf but not in mainconf
   if grep -oFf "$conf"  "$mainconf" | grep -vFf - "$conf"; then
-    echo "error for $conf"
+    echo "error for $conf" >&2
     ret=1
   fi
 done
