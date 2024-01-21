@@ -7,3 +7,7 @@ kernel](https://gitlab.archlinux.org/archlinux/packaging/packages/linux.git).
 # Build
 
 Run `makepkg -C`.
+
+# Updating
+
+Merge from `https://gitlab.archlinux.org/archlinux/packaging/packages/linux.git`
