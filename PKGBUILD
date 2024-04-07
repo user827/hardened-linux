@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-my-hardened
-pkgver=6.8.1.arch1
+pkgver=6.8.4.arch1
 pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
@@ -46,20 +46,20 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('8d0c8936e3140a0fbdf511ad7a9f21121598f3656743898f47bb9052d37cff68'
+sha256sums=('d5dec495fc00605fa9e04114df547fbc92b33d9ea7a4a2b7073c589590e79e63'
             'SKIP'
-            '376db82b4613c3942932fde99d54c3dea1e4b29ab23d8b86daa6414327e6244d'
+            'bb2b3aa16007a0d5d61571af86a44be414f8672dad5a719cbdc92bfb758b1217'
             'SKIP'
-            'd9ba3f0276215cfe2bf215c073155e60acbf48770fc502a16df80f60bbd4cf72'
+            'da9379ed5f1aa5b954b1e42bc4c17ac152d9732cf2b3d037c4f77bc89c1860b5'
             'be2276fdfdca3c91922d35490aac37bac3d8ce428803f6d2840852643ebe3402'
             '0849844663fdedec11a93bd2a30e0639fb26d28eb2135f7527829aad8441e109'
             '527c7359d50a51c76c5fce1af8becb250378f0d4bdbab8b6fa00d618c75f1427'
             'SKIP')
-b2sums=('2b518f8f39b4dcea1c580cb0664d59c165db989422fd6fd6b65d3dd1e4548bc6e0cedfc95c2584ae56f69ac1a1d3de6552ee61e77b08799a5275934a453ab929'
+b2sums=('cf58732397bfa11988b79901092887d53c3367d09f63da51ebdcc83518be3a7e9a638fbbb1ff080cd7abed633fadff03d1d7a3928b772de57b14e46e552f9462'
         'SKIP'
-        '632a1934bf7c194f9ddb9b21c4acf27112152c9541a68e8ca1ff02bbc1fda126031f8ab6290350e4c2cef6aac41fe7469661abad5d83a3c05015a3ee4a4652c7'
+        '51f592b6448e2fa81438048cc2b2fac6395f42f03e5a3bf2d3318e38db43a066ee0a24e364bee3fa42da939ff82f0bd44bba1a2b3fddd8cc61d370045e12b5fb'
         'SKIP'
-        'b5609f57209932e618536b9226f85bf86f6e03c7614128e1e6cbd6d4cc3527c6eab5c2c0fadbcc01eec6b1da9d728d60545fb66b7d0581cbf4f25f7dcd4e1f6c'
+        '472e84eacbbda2eda933e9e83a3f31b33911798720d40320e3b57b641df177da21d49dc5241c39c1f19d95f403740aa8eaae3bf5f940609ab91c27d19fb91f5a'
         '945533780eb99c6632431c8aa7abc92611e34a4a8e872e87beebc7f1b9d64f7e58770d83f99cd8bde3d416e68a0a030a6bf39f6b2579ef068cb2f665a1a50626'
         '55457aecd7c4330899857d3734de945eed040449f70b2ec2f42ae844b570b40609c07f5e22dcaddabf42d382eb8edcba33abe2309138f465caa1dec7785f6cb3'
         '73916507bcb3c603f12a7b00718042984dd095ebca8720edfe6978cd6415a61ba48729e6abeb6ce5ead54335a056fac84b97e2b4bb58507bdc1f6c64fbf2d943'
