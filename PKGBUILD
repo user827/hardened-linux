@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-my-hardened
-pkgver=6.8.6.arch1
+pkgver=6.8.7.arch1
 pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
@@ -39,7 +39,6 @@ source=(
   checkconf.sh
   confkspp
   "kconfig-hardened-check::git+https://github.com/a13xp0p0v/kconfig-hardened-check"
-  docutils.patch  # fix the docs build
 )
 validpgpkeys=(
   ABAF11C65A2970B130ABE3C479BE3E4300411886  # Linus Torvalds
@@ -47,26 +46,24 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('9e723232d603ab45ebf043c34714c48f277ab195c29abcb8472f2a4c3a5a1995'
+sha256sums=('291d1a1faf4e87b3b0ea9729080db887aafd1ff2fac1430ceca921e46bc22fae'
             'SKIP'
-            'db03a8ea8ba5bb3f337c72812831dade02643b481148d3cce3a3855c9d82e53c'
+            'a49b47f89187d2fce6c79f263683bc06b152974b4cf8d8faee535e4bcf04adc7'
             'SKIP'
-            '1234a62dae19d437c5c7d68ab7c4ef74ef5955a6e6c43be2fe0156cb8ed9639c'
+            'ac55b9b3eb7a1826941c48bad7c4a76d8b39aa152e8d22a48d2491fb437221e5'
             'be2276fdfdca3c91922d35490aac37bac3d8ce428803f6d2840852643ebe3402'
             '0849844663fdedec11a93bd2a30e0639fb26d28eb2135f7527829aad8441e109'
             '527c7359d50a51c76c5fce1af8becb250378f0d4bdbab8b6fa00d618c75f1427'
-            'SKIP'
-            '9cb73cacbb3633f207d0c30e738cae9965adcd0b0eb5ecd60563fed1394c0f38')
-b2sums=('fea25d171e8e4e0394211b5589d76fd85537094dc80c135e80fc8bd32acf0d6f4f34524c35df960e8c7ee488c8288d158fc233d6cc7a76182996a658741da71b'
+            'SKIP')
+b2sums=('e8626a99c6c5769a8126d5ee1c7962c3df3c7a8c689193ffa864c4a4b8e72daeeaf22c3e3bb6ba5490eca3ef64c32a4a12980360a196444a53abadd791cd1855'
         'SKIP'
-        '25d58044c04e7d302de814a9e207da4a90cc66f0c497b6a6ce3d2f643ef3d757658fbe465080902ef9216f9a4a68e41e75f17ca2c381eb3fa5935be5566da8ac'
+        'ae851de7fbe18ace280440a0125e5a0d864e4d648e1161ad03c99eaabf7d228d6c9c6869520ddd14b546c14e30b17c6a191d947ad4e9652cd8af9d9ad209eef3'
         'SKIP'
-        '7f81676b3b2fb550134259f57c36b474dbdddc6bda22c4ff06d2f89827ba40a483c835ab5d1c93914726331235354d25dca832539930a7fdff44f6108d30def8'
+        '88ed75cff268b0ee0f3eddfabbc1e565532e6ce200a769d4f43d58194ebd80231758d85a15d292892033fdb20b035e702d2eb89e4fa0fb5f2a6f8adab9252830'
         '945533780eb99c6632431c8aa7abc92611e34a4a8e872e87beebc7f1b9d64f7e58770d83f99cd8bde3d416e68a0a030a6bf39f6b2579ef068cb2f665a1a50626'
         '55457aecd7c4330899857d3734de945eed040449f70b2ec2f42ae844b570b40609c07f5e22dcaddabf42d382eb8edcba33abe2309138f465caa1dec7785f6cb3'
         '73916507bcb3c603f12a7b00718042984dd095ebca8720edfe6978cd6415a61ba48729e6abeb6ce5ead54335a056fac84b97e2b4bb58507bdc1f6c64fbf2d943'
-        'SKIP'
-        '0bb42a22c110f06a45e59a9adc194184a51ff97e5584d6ffabca0aa37e1e65ccaf44f43dc744eaa3861d6f6b00e299d4662bcf0c0d94478af9352b4c4f6b0ffd')
+        'SKIP')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
