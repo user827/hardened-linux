@@ -1,7 +1,7 @@
 pkgbase = linux
 	pkgdesc = Linux
 	pkgver = 6.9.1.arch1
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/archlinux/linux
 	arch = x86_64
 	license = GPL-2.0-only
@@ -33,12 +33,12 @@ pkgbase = linux
 	sha256sums = SKIP
 	sha256sums = 8cb3d0a2769d1471c38fb5f1bdd1395333790453a399767c3af8673bc6a714b5
 	sha256sums = SKIP
-	sha256sums = bbf3ebee5fcf2780a5f6b14fd13ceea809b0e332eebc452a63b5d0513747bf7e
+	sha256sums = 60ef83a9b4f244066c74a06dcb2c72aa12782389200beffd1c4e6107d982b659
 	b2sums = 388af1d13e78a424f72a961697f4b0b6a234e54ce1e4a2532fc73717301e048c6f4a6251b6e3c4541179d1382566c3f411baa6883818a10d178ef27d036b5379
 	b2sums = SKIP
 	b2sums = 3d8c25071e26979713ea100a4dca112eccd21bc421a6292354f49b19b462697985777fb7624d7fed320ea392d20b121c03b9af2f6b3fe1a6d7d511e092395ed2
 	b2sums = SKIP
-	b2sums = 7834f8e796d188bad31689f85cad01fdd9311b1f40d37405bcf64b44245008e44cff09410690e6e9b67dc8f6281f02fcf60b355e5844eaffd4906a19a0cba6b8
+	b2sums = 02ddad79bc0d919af24f61a4f6d2973901a19e64d0cf4bd182cce30983eb153e7e7d06ced102f6a6c25087508b2580136210ce9c2252b29e79473a4e3200a91b
 
 pkgname = linux
 	pkgdesc = The Linux kernel and modules
