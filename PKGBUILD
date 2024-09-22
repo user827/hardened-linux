@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-my-hardened
-pkgver=6.10.7.arch1
+pkgver=6.11.arch1
 pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
@@ -15,6 +15,9 @@ makedepends=(
   pahole
   perl
   python
+  rust
+  rust-bindgen
+  rust-src
   tar
   xz
 
@@ -46,20 +49,20 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('900d567ff01824708ce24c3b37faaef03e6f6145411dd447a6ff2edc8c5db3a9'
+sha256sums=('55d2c6c025ebc27810c748d66325dd5bc601e8d32f8581d9e77673529bdacb2e'
             'SKIP'
-            '7d5dd316ef5b87b9159872452c76dfa0ca31486f96a722133beec9e22dd7e65c'
+            'ade8767de6e946acf29d9294c45f05d71b94f6e162317b6466d85cd04f5cf6f7'
             'SKIP'
-            '683f136e11c8dee2f6a72a61c79c86de7ab6b45b7bb8ed76ffdceaef3a7a6c86'
+            '58462c8053c2a2fecd0fe5cf2ffbe82ea2632a41a7f3e0f3f812d91466d8c354'
             'e50224ed0f9ae544ce243c9fa6d8cfaf11e37f9e2331c5c967d0a908b6a04730'
             '0849844663fdedec11a93bd2a30e0639fb26d28eb2135f7527829aad8441e109'
             '527c7359d50a51c76c5fce1af8becb250378f0d4bdbab8b6fa00d618c75f1427'
             'SKIP')
-b2sums=('a177df46c43bef6a529e50af64103a40eabc9d7301f93c8e1a4ed3e6b0e03bec195838c6085f3df798b7d941c0943ba31b23b1717150785ef52cfa8bd2dc028d'
+b2sums=('e7750c0878d71a56a0ce52d4c4c912199dad5bf5e2e8f872585a6494afbb37cbd852e612a6858936d2dc9b7776a3933818f540db408d57e90d18ea5249bba7ab'
         'SKIP'
-        'b0c8e1ef3d2a0f5f1bbfb8e33d5fcf7af1bb580f0edb6981e3a5f8e247c78282a0762334556d70be0bbb1df186d59c153d74652ec64d0f484ca499063b6bcdce'
+        '09ecff50d0efe2ead6bcdbac9f47bba37c74eb5c0b2cdf00ee1624af9e633e3be8058a05373774b2a4e7b7c99df1f4cbac4c9b120f859b656fbb013fca173ab4'
         'SKIP'
-        '27611b0b70bc78753ec26f929656984fe75e8270df1b7c9736d3de6b4daa8f659633a29b68471760803047bd702990235aa28871118a02552a15ee4695261385'
+        'e84a095a8d39638c41c406f8948fa175d7621b659854cc13a87292df64265a614718983126a75bdc99fefb1f240bbd85260ce96c5bdec65135fb1c453e851997'
         'df7dc24d08e39a95a872f269b05e5231678e03742130e5eb43a8555202637222568a9ea96376e2540d483ad4e36f1b24f7702f3b5ca422c9c1fcf5d4ba527e23'
         '55457aecd7c4330899857d3734de945eed040449f70b2ec2f42ae844b570b40609c07f5e22dcaddabf42d382eb8edcba33abe2309138f465caa1dec7785f6cb3'
         '73916507bcb3c603f12a7b00718042984dd095ebca8720edfe6978cd6415a61ba48729e6abeb6ce5ead54335a056fac84b97e2b4bb58507bdc1f6c64fbf2d943'
@@ -166,6 +169,7 @@ _package-headers() {
   install -Dt "$builddir/kernel" -m644 kernel/Makefile
   install -Dt "$builddir/arch/x86" -m644 arch/x86/Makefile
   cp -t "$builddir" -a scripts
+  ln -srt "$builddir" "$builddir/scripts/gdb/vmlinux-gdb.py"
 
   # required when STACK_VALIDATION is enabled
   install -Dt "$builddir/tools/objtool" tools/objtool/objtool
