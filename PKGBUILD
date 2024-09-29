@@ -15,9 +15,6 @@ makedepends=(
   pahole
   perl
   python
-  rust
-  rust-bindgen
-  rust-src
   tar
   xz
 
