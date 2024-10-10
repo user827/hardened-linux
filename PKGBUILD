@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-my-hardened
-pkgver=6.11.1.arch1
+pkgver=6.11.2.arch1
 pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
@@ -46,20 +46,20 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('2a372373b4e1eaf55f2a2f104bfa91477ec9b263acf8f3aed08f4d8bdc78ee3d'
+sha256sums=('ec9ef7a0b9cebb55940e1ef87a1f9e1004b10456a119dc386bb3e565b0d39c42'
             'SKIP'
-            'cb4acbf6c7f0ef00e335929d90ea2acadead0266d9f769c15976ee74c5c8828d'
+            '86e2959cac748ff503f33e40d5994acc3eb5008b9ff9ca2a7e2d264c107a4b24'
             'SKIP'
-            '78296fe09151e28633fdc1b12099cf2db1b6ff0a2dc215a470bdcc585485040c'
+            '12ac935c30e339ed8444c0fd597c52e82f8f83dd202b0be0cd46b8345f8cfd1d'
             'e50224ed0f9ae544ce243c9fa6d8cfaf11e37f9e2331c5c967d0a908b6a04730'
             '0849844663fdedec11a93bd2a30e0639fb26d28eb2135f7527829aad8441e109'
             '527c7359d50a51c76c5fce1af8becb250378f0d4bdbab8b6fa00d618c75f1427'
             'SKIP')
-b2sums=('ac9927d74542a2d244b9d683920363ec2dbbe851ae0e069b278f1a0ba82c58b00f0f0312104b46f1b8c06585c2e6acb7eb1e63bd28499891f629c00f9a32f6b5'
+b2sums=('5720e8dd0bed0247dcfe0bdbce17e36e67bff56811611ae1b04f048b77b6e60c2a48303db73c5a0d4a56c7125cdd695116c4dfd965bd7cb28aa932f427bb3e7d'
         'SKIP'
-        '3621c4b5476cd615d0abb2568ed8b67bc5a4022a35ae0fa2c0d9ef27d5e31fcab56d38aa0ca86320357f4cc31c7e5d3acb12222694ec83a8aab21b16847c8b81'
+        'a34d50594e17ea6e9e89dc9fecfcc1417db823e5bbaa7038864b6d1edfdfb38424cdb4a97b70ec57b625b72c7f239b9c1cb2acfab00af8aca5bea566de662bc4'
         'SKIP'
-        '0842059b9ce4f92b98e87165df9a2431b8fd30fbed1ab53a47a9dfe3eac1c4ec9cb5780d7a10ee1fb8e0286499f7871e76118d67a8b59d11d3fd28781ccbffa3'
+        '9f1910be7226c3f078e2cdf90b51ac19da663d12ada10f608f0407813a46abd231a8dedd437923af7c217a0eda28ef88eea3a40f326c10a044b82fbc301bc2ac'
         'df7dc24d08e39a95a872f269b05e5231678e03742130e5eb43a8555202637222568a9ea96376e2540d483ad4e36f1b24f7702f3b5ca422c9c1fcf5d4ba527e23'
         '55457aecd7c4330899857d3734de945eed040449f70b2ec2f42ae844b570b40609c07f5e22dcaddabf42d382eb8edcba33abe2309138f465caa1dec7785f6cb3'
         '73916507bcb3c603f12a7b00718042984dd095ebca8720edfe6978cd6415a61ba48729e6abeb6ce5ead54335a056fac84b97e2b4bb58507bdc1f6c64fbf2d943'
