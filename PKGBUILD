@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-my-hardened
-pkgver=6.11.2.arch1
+pkgver=6.11.3.arch1
 pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
@@ -46,20 +46,20 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('ec9ef7a0b9cebb55940e1ef87a1f9e1004b10456a119dc386bb3e565b0d39c42'
+sha256sums=('057263d0afc17d5253794afd3d239ba4da4aa734b22fa36c1665f41b95449b73'
             'SKIP'
-            '86e2959cac748ff503f33e40d5994acc3eb5008b9ff9ca2a7e2d264c107a4b24'
+            '30683bfd1ee6cfcb9a1491fc52306f94282c252964f88da14e8b21b32af82920'
             'SKIP'
-            '12ac935c30e339ed8444c0fd597c52e82f8f83dd202b0be0cd46b8345f8cfd1d'
+            '43a0d82b1049e9b562424108662d8cabe491159278f158a6372aedf80a2f44a6'
             'e50224ed0f9ae544ce243c9fa6d8cfaf11e37f9e2331c5c967d0a908b6a04730'
             '0849844663fdedec11a93bd2a30e0639fb26d28eb2135f7527829aad8441e109'
             '527c7359d50a51c76c5fce1af8becb250378f0d4bdbab8b6fa00d618c75f1427'
             'SKIP')
-b2sums=('5720e8dd0bed0247dcfe0bdbce17e36e67bff56811611ae1b04f048b77b6e60c2a48303db73c5a0d4a56c7125cdd695116c4dfd965bd7cb28aa932f427bb3e7d'
+b2sums=('69582e4745850f3ec004d87859ac88994e3715ed38cd66aff2633fbcb6c20ca2e3be83417cd2c42c2757ab4e084e622c688799b5ad28e15c391adb2afab79a68'
         'SKIP'
-        'a34d50594e17ea6e9e89dc9fecfcc1417db823e5bbaa7038864b6d1edfdfb38424cdb4a97b70ec57b625b72c7f239b9c1cb2acfab00af8aca5bea566de662bc4'
+        '9d5db395f525fff7a9d87bf6301d907fefa7f864bc7be712a72d17ceefefb6cd09afe19153df43ab5cd4d2c7abce9a1bfe974b909c5f27e4b818fffa29932a73'
         'SKIP'
-        '9f1910be7226c3f078e2cdf90b51ac19da663d12ada10f608f0407813a46abd231a8dedd437923af7c217a0eda28ef88eea3a40f326c10a044b82fbc301bc2ac'
+        '2923fd4af3be242ccde68f2cc6604ca18429d88b5d4421c47b317bfbea7a836b2544db2ddca3048cfcbc1045c3746ad94f1539a392187d4b73a57ba38b1719f9'
         'df7dc24d08e39a95a872f269b05e5231678e03742130e5eb43a8555202637222568a9ea96376e2540d483ad4e36f1b24f7702f3b5ca422c9c1fcf5d4ba527e23'
         '55457aecd7c4330899857d3734de945eed040449f70b2ec2f42ae844b570b40609c07f5e22dcaddabf42d382eb8edcba33abe2309138f465caa1dec7785f6cb3'
         '73916507bcb3c603f12a7b00718042984dd095ebca8720edfe6978cd6415a61ba48729e6abeb6ce5ead54335a056fac84b97e2b4bb58507bdc1f6c64fbf2d943'
