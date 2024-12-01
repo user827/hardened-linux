@@ -1,8 +1,8 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-my-hardened
-pkgver=6.11.8.arch1
-pkgrel=2
+pkgver=6.12.1.arch1
+pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
 arch=(x86_64)
@@ -46,20 +46,20 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('aee8a844fe152420bece70ffae8525b9b23089aa4da31fa32f30e1859bf93c3d'
+sha256sums=('0193b1d86dd372ec891bae799f6da20deef16fc199f30080a4ea9de8cef0c619'
             'SKIP'
-            'f1fc632a9ba819dd8aa019ddf59df554a906a5e17838566c9203b7a7582d8043'
+            '518f473f291a71006299a17ce376fa0d587c2e8995ecc7be143b06a2ce5423b3'
             'SKIP'
-            '634bfcd7fadfd773e22fa204de39eaf895ffd1c5cfd4d3bb9d564179999ec3b9'
+            '11befedef1250e176aab77b109e921731303fe960ba05aee20c8ffb58a392cfb'
             'e50224ed0f9ae544ce243c9fa6d8cfaf11e37f9e2331c5c967d0a908b6a04730'
             '0849844663fdedec11a93bd2a30e0639fb26d28eb2135f7527829aad8441e109'
             '527c7359d50a51c76c5fce1af8becb250378f0d4bdbab8b6fa00d618c75f1427'
             'SKIP')
-b2sums=('2d3b56bf4fa3a3d20c5379856c9e2d2ce7220bc05320859e123053d08138dd380f9aa7a9d11df3a8fbe07583a28bafffc0ffd3ed9cf28ebf09d6af7e97a0ed5f'
+b2sums=('de3f4dec2fc7e36711c68683d6564d0c3ce6fe728ffa6a629604e2fa9e489dbab45fd6676343f6e68bafbd202a3e814e82a1448b46844e34046b9f82f819b8f4'
         'SKIP'
-        'd08d4aa2053a0b40c879aa7f6e1a58d271ea7d433dad9023eadedd0eeb2f67d2ea93d90137d84e0ce41d5104dfde1a8a20e0fb93f0faa124b6e44dda631b8024'
+        '6e1d77f20b961ef0fc7fa999ba5d9cbbf8a0dd415c84d43274924938077915e879d19591ccb1a32e839b625a125dde64cd891142c1cecf24621fa4a559b3dbf0'
         'SKIP'
-        '6835c42fd3a85fabf20cdb01564ad3ae12e0afb16512249bb50c52feb021da5b290ad3902b75d544aa2270d21da7ce357c3bc18ee137d9543124ad5728f6bf65'
+        'd4c03e20020a382a2135b264aa8ccc9db30399ba5ea341277892c2f25454f88e8ce1c551598ed47d81adc4cbfac288dfbfe3c2cf56efc7ff30143f791e3d2329'
         'df7dc24d08e39a95a872f269b05e5231678e03742130e5eb43a8555202637222568a9ea96376e2540d483ad4e36f1b24f7702f3b5ca422c9c1fcf5d4ba527e23'
         '55457aecd7c4330899857d3734de945eed040449f70b2ec2f42ae844b570b40609c07f5e22dcaddabf42d382eb8edcba33abe2309138f465caa1dec7785f6cb3'
         '73916507bcb3c603f12a7b00718042984dd095ebca8720edfe6978cd6415a61ba48729e6abeb6ce5ead54335a056fac84b97e2b4bb58507bdc1f6c64fbf2d943'
@@ -121,8 +121,9 @@ _package() {
     kmod
   )
   optdepends=(
-    'wireless-regdb: to set the correct wireless channels of your country'
     'linux-firmware: firmware images needed for some devices'
+    'scx-scheds: to use sched-ext schedulers'
+    'wireless-regdb: to set the correct wireless channels of your country'
   )
   provides=(
     KSMBD-MODULE
