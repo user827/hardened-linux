@@ -1,9 +1,8 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-my-hardened
-pkgver=6.12.1.arch1
-pkgrel=2
-pkgdesc='Linux'
+pkgver=6.12.5.arch1
+pkgrel=1
 url='https://github.com/archlinux/linux'
 arch=(x86_64)
 license=(GPL-2.0-only)
@@ -46,20 +45,20 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('0193b1d86dd372ec891bae799f6da20deef16fc199f30080a4ea9de8cef0c619'
+sha256sums=('39207fce1ce42838e085261bae0af5ce4a0843aa777cfc0f5c49bc7729602bcd'
             'SKIP'
-            '518f473f291a71006299a17ce376fa0d587c2e8995ecc7be143b06a2ce5423b3'
+            'c41844762ed22ce71f6b4988a691061fac9ea10cf26e069f2ebca467c3b814db'
             'SKIP'
-            '11befedef1250e176aab77b109e921731303fe960ba05aee20c8ffb58a392cfb'
+            'e91bb8c805000ed56c5d13b864124901192cbac8cd6ebf5ab1165a4953bfcbba'
             '01b9a981a417842d8b7b34771217071f0a9a7a0706240f84f4b1e363e218dc24'
             '0849844663fdedec11a93bd2a30e0639fb26d28eb2135f7527829aad8441e109'
             '8cdfd0bae12383a3f55194f4964d8925d6be401a192ee0486397ec372b395804'
             'SKIP')
-b2sums=('de3f4dec2fc7e36711c68683d6564d0c3ce6fe728ffa6a629604e2fa9e489dbab45fd6676343f6e68bafbd202a3e814e82a1448b46844e34046b9f82f819b8f4'
+b2sums=('bca871f8ebc2b2d286c0d2fb8526aeff835aa9eb4af43c307dea08c9da31592310e3e103d3294152a7e011f8539629c0cec925d23cb635191cdd41da86babc29'
         'SKIP'
-        '6e1d77f20b961ef0fc7fa999ba5d9cbbf8a0dd415c84d43274924938077915e879d19591ccb1a32e839b625a125dde64cd891142c1cecf24621fa4a559b3dbf0'
+        '8f422e513a972127da980c922f232849431de28aa30af816bf6771687b36600fe149c06ad3453a9148a95e708a7becc312ffa0366855c48847a9c0abd8b560f4'
         'SKIP'
-        'd4c03e20020a382a2135b264aa8ccc9db30399ba5ea341277892c2f25454f88e8ce1c551598ed47d81adc4cbfac288dfbfe3c2cf56efc7ff30143f791e3d2329'
+        '6b934ddaebe1d2e41d7f98c03dd46094cb524e559f72998959d3b983936686a086f76997eae3dddfd9a79683733a9527cdd9f91f2d630bb85a50f158ac11fb82'
         '2740fec4ce91df7ea9cef434a27b9ee5608a5bb68a70ddcff7e3c9975b463602b76f0b5b4b081cb0ddfae6b6d3e20ee8e8c986361af7dac302d685decfcd7464'
         '55457aecd7c4330899857d3734de945eed040449f70b2ec2f42ae844b570b40609c07f5e22dcaddabf42d382eb8edcba33abe2309138f465caa1dec7785f6cb3'
         '59b28721049bbc719f97cc3003d09ae3d3a77595d9eba2467e028d00cdb6ec4695bac84c78110d9b71cf5988439c6e3fcea4efd7fbd9f84fa9fa706f31d8c17a'
