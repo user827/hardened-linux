@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-my-hardened
-pkgver=6.13.4.arch1
+pkgver=6.13.8.arch1
 pkgrel=1
 url='https://github.com/archlinux/linux'
 arch=(x86_64)
@@ -14,6 +14,9 @@ makedepends=(
   pahole
   perl
   python
+  rust
+  rust-bindgen
+  rust-src
   tar
   xz
 
@@ -45,20 +48,20 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('b80e0bc8efbc31e9ce5a84d1084dcccfa40e01bea8cc25afd06648b93d61339e'
+sha256sums=('259afa59d73d676bec2ae89beacd949e08d54d3f70a7f8b0a742315095751abb'
             'SKIP'
-            '9396ecd603c0129ca8457731db5fef117f75b63aec7a6782d5acbe8e4cd64787'
+            '8807a915606709dd8ab98fa836fadefda39ed500c48377355be09fe9a2caaf81'
             'SKIP'
-            'fd246aacd33f16fa148802f4d79aaf7df726c8300f75fa640846bfaf0817cd0f'
+            '5a181519e3fbe2f387f95ab1467f51d5290518a714c02dc1ed11f7d9de6160da'
             '01b9a981a417842d8b7b34771217071f0a9a7a0706240f84f4b1e363e218dc24'
             '0849844663fdedec11a93bd2a30e0639fb26d28eb2135f7527829aad8441e109'
             '8cdfd0bae12383a3f55194f4964d8925d6be401a192ee0486397ec372b395804'
             'SKIP')
-b2sums=('2fe8e972e7de458fba6fbb18a08a01f17b49e4a2d31aa1368e50895a2698c6e1aaaf5137d0c0018860de3fe598e4ba425d6126ade7387ba227f690137111a66d'
+b2sums=('c20916a44a07d355ba8337229f102cd507deae92c88576040965e909fa89c09f98611746a8c8f249bc3dcf492238ce3f08c48f523670ccad4bd7ec21622806af'
         'SKIP'
-        'da2f63697300bd07a28ab201aa879974eb50870cfcb6d0593c4ca33434ee0ccaa778be9a165f998f2f3e41e4f9f81d811255e6f056c9d15f8259da60d6680e2b'
+        'ebff29f7282a7dab84ca09c9c23621daec8d38541c773dc068d5c313db7a60c67e204775ad6e00746ee8f04a7705ab398688e03b2e5534e9062d276e8d6c9d30'
         'SKIP'
-        '9b5495b539ba0f7dfd4232f4589276bf352f859fd09dd3d05fb0fdd1bccfa04607d6762cef64df7b7b01e944b55fa4132fdace2d65b730ce23e4e04a3e399444'
+        '46c85fb5bd98df060acbe09185147b29a95ad99f0c2a37c0d2c0b888087ef58b7beab2527063395fc412c277ce4889aa16051ff8bbb1ccdef0f77eccd1c82c72'
         '2740fec4ce91df7ea9cef434a27b9ee5608a5bb68a70ddcff7e3c9975b463602b76f0b5b4b081cb0ddfae6b6d3e20ee8e8c986361af7dac302d685decfcd7464'
         '55457aecd7c4330899857d3734de945eed040449f70b2ec2f42ae844b570b40609c07f5e22dcaddabf42d382eb8edcba33abe2309138f465caa1dec7785f6cb3'
         '59b28721049bbc719f97cc3003d09ae3d3a77595d9eba2467e028d00cdb6ec4695bac84c78110d9b71cf5988439c6e3fcea4efd7fbd9f84fa9fa706f31d8c17a'
@@ -195,6 +198,14 @@ _package-headers() {
 
   echo "Installing KConfig files..."
   find . -name 'Kconfig*' -exec install -Dm644 {} "$builddir/{}" \;
+
+  echo "Installing Rust files..."
+  install -Dt "$builddir/rust" -m644 rust/*.rmeta
+  install -Dt "$builddir/rust" rust/*.so
+
+  echo "Installing unstripped VDSO..."
+  make INSTALL_MOD_PATH="$pkgdir/usr" vdso_install \
+    link=  # Suppress build-id symlinks
 
   echo "Removing unneeded architectures..."
   local arch
