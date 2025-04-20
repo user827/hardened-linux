@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-my-hardened
-pkgver=6.13.8.arch1
+pkgver=6.14.2.arch1
 pkgrel=1
 url='https://github.com/archlinux/linux'
 arch=(x86_64)
@@ -48,20 +48,20 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('259afa59d73d676bec2ae89beacd949e08d54d3f70a7f8b0a742315095751abb'
+sha256sums=('c5c682a354ea3190139357a57d34a79e5c37221ace823a938e10116b577a2e1b'
             'SKIP'
-            '8807a915606709dd8ab98fa836fadefda39ed500c48377355be09fe9a2caaf81'
+            '69f432c56f7f94f0ad185f1ce30f620115d48b61fc554e92de2a056311c50a62'
             'SKIP'
-            '5a181519e3fbe2f387f95ab1467f51d5290518a714c02dc1ed11f7d9de6160da'
+            '23688cc8883d14b4dd9f94d07c5e4ead77d6cef15b1a092f8226cc05bcdfe0d6'
             '01b9a981a417842d8b7b34771217071f0a9a7a0706240f84f4b1e363e218dc24'
             '0849844663fdedec11a93bd2a30e0639fb26d28eb2135f7527829aad8441e109'
             '8cdfd0bae12383a3f55194f4964d8925d6be401a192ee0486397ec372b395804'
             'SKIP')
-b2sums=('c20916a44a07d355ba8337229f102cd507deae92c88576040965e909fa89c09f98611746a8c8f249bc3dcf492238ce3f08c48f523670ccad4bd7ec21622806af'
+b2sums=('ebba8a341d180887bbe125b23a3ac54ca7439eded877930f7b7df9a5ed3378701523e0cde972b520eaedf7f24d70d4d8db62db103e21943abeb35f9c1c91e4a7'
         'SKIP'
-        'ebff29f7282a7dab84ca09c9c23621daec8d38541c773dc068d5c313db7a60c67e204775ad6e00746ee8f04a7705ab398688e03b2e5534e9062d276e8d6c9d30'
+        'e1a358d1d420d2c280fdc1cbaceda7a2f432a67abe9a4c0bc429aa17cbdbbb086c948cfbeb63dca84eff45184148805b07e2500e2a253476877879a79f546219'
         'SKIP'
-        '46c85fb5bd98df060acbe09185147b29a95ad99f0c2a37c0d2c0b888087ef58b7beab2527063395fc412c277ce4889aa16051ff8bbb1ccdef0f77eccd1c82c72'
+        '4d7ebc6bb2fc3ef7b9385d5cf1f8a2309d483e4c97d87759515b7244df3a012aa330d3c01d2c3a6c555ca87bdf70172b26db3e19596b8927bfd26e06e95dfca7'
         '2740fec4ce91df7ea9cef434a27b9ee5608a5bb68a70ddcff7e3c9975b463602b76f0b5b4b081cb0ddfae6b6d3e20ee8e8c986361af7dac302d685decfcd7464'
         '55457aecd7c4330899857d3734de945eed040449f70b2ec2f42ae844b570b40609c07f5e22dcaddabf42d382eb8edcba33abe2309138f465caa1dec7785f6cb3'
         '59b28721049bbc719f97cc3003d09ae3d3a77595d9eba2467e028d00cdb6ec4695bac84c78110d9b71cf5988439c6e3fcea4efd7fbd9f84fa9fa706f31d8c17a'
@@ -129,6 +129,7 @@ _package() {
   )
   provides=(
     KSMBD-MODULE
+    NTSYNC-MODULE
     VIRTUALBOX-GUEST-MODULES
     WIREGUARD-MODULE
   )
