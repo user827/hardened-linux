@@ -1,1 +1,4 @@
 *.pkg.tar.zst
+/*.old
+/*.orig
+/*.rej

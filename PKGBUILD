@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-my-hardened
-pkgver=6.15.7.arch1
+pkgver=6.16.4.arch1
 pkgrel=1
 url='https://github.com/archlinux/linux'
 arch=(x86_64)
@@ -48,20 +48,20 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('3507dd105b0a0e1101bd43d294472fccf853429a259a5fa7c67467bba318f8e9'
+sha256sums=('d6a5e3c71a10b533a756251387cc8bf48bbd5c76d842ba5e957d8b1c316ab622'
             'SKIP'
-            '14c8bdb45022c28f06b13274f3ec838fa7f8bdad0d1dc1137d4d01cd2851fa71'
+            'bbb122a7ab583e548e10a459588ca8aeb0efe7112a9c1e5e7155f8f88d1f2fa1'
             'SKIP'
-            'edfa5067a457c0ac30da72e964c47fb7897a70192025d42e819bda93a4607b42'
+            'd06b623e5005bf038592813dcfbba908851e6ee59b04ccab07bfefc4bc335c62'
             'b984348e02c27da652ea2cf7dc4f2e993f1a7567ee846a8de71ddf3647f4da95'
             '0849844663fdedec11a93bd2a30e0639fb26d28eb2135f7527829aad8441e109'
             '8cdfd0bae12383a3f55194f4964d8925d6be401a192ee0486397ec372b395804'
             'SKIP')
-b2sums=('da0d7e22e88e5d46636bc53ebaaccbb986b98d41ee786fe87bff6777dd15426b3fdb254e628674871c679c7942971e9ad10ebdfed6666e7127dfb292f60125ff'
+b2sums=('251feef2f995c155850eac2fce5b89f37f39e9f13b6a4e6873370fdc69654692c6bf6c92f04ca7c0b5fd6088d74442afb68db71d2cc18691e23c61b0be714f34'
         'SKIP'
-        'aac70b2c9db8b5abb19b994995f2cf2dacbf2f010e39a294bd6975476a3db3183d50949891b33db785d3ae82cf9f9e61d5dc481d89eb24e303fb2ce75cc1d9f9'
+        'fc43e6e57889aac4d401c0c4d1dd0f1e7c534de99ca25f928624c8bba842102f6c17ee74e8d7353cc71fc3655db24ca0c5097eb0b89e90d6eec1820d5302d28d'
         'SKIP'
-        '2d35c47c4beaa1dda931a279b056c00e05b353200ad02dff1b1c110058eee0ef2472b6f8131d78c0b4c450998f430297ae05b3bea7c3572e44da4c3ae5454ad3'
+        '4767687b61d0268e289f2444733172a29f1a1cd5d0c8041f4ff6fdc26d46d2d37528dd2b8b3e5c31bed6e306c821ea8f677a76ffaa8e4e5acd29c6d9e47e52df'
         '9fcf4521c82c7faf2681d853e95d979ea3a7f4d756d450774703fa5b70c7f01eed9962558239f188e61cf35c964178328698de6abb075c269dba0342a8a136f0'
         '55457aecd7c4330899857d3734de945eed040449f70b2ec2f42ae844b570b40609c07f5e22dcaddabf42d382eb8edcba33abe2309138f465caa1dec7785f6cb3'
         '59b28721049bbc719f97cc3003d09ae3d3a77595d9eba2467e028d00cdb6ec4695bac84c78110d9b71cf5988439c6e3fcea4efd7fbd9f84fa9fa706f31d8c17a'
@@ -113,6 +113,7 @@ build() {
   ../kconfig-hardened-check/bin/kernel-hardening-checker -c .config -m show_fail | tee hardened_fails
 
   make all
+  make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
 }
 
 _package() {
@@ -176,7 +177,7 @@ _package-headers() {
   install -Dt "$builddir/tools/objtool" tools/objtool/objtool
 
   # required when DEBUG_INFO_BTF_MODULES is enabled
-  #install -Dt "$builddir/tools/bpf/resolve_btfids" tools/bpf/resolve_btfids/resolve_btfids
+  install -Dt "$builddir/tools/bpf/resolve_btfids" tools/bpf/resolve_btfids/resolve_btfids
 
   echo "Installing headers..."
   cp -t "$builddir" -a include
