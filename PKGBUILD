@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-my-hardened
-pkgver=6.17.1.arch1
+pkgver=6.17.3.arch2
 pkgrel=1
 url='https://github.com/archlinux/linux'
 arch=(x86_64)
@@ -48,9 +48,9 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('a53dbe3f41491922a61f17c5cc551e88f544d5411aeb1c8c65c402795c4f4da0'
+sha256sums=('3ecc8619d8a5b5f675224d2f52c71d1fc09bc3f9c019d8bd82d0581e03689499'
             'SKIP'
-            'a54fc872d8de04688d59f4123132661c24804735afefdf95896621bb23974ef1'
+            '4f3e15b38b1d5b4bd17741504a6560ca047601d057626fbf1af185025fd89fd9'
             'SKIP'
             'a1fa0d200fb93c8721da34528b3abac671568525d657b1ca2fe57efc86979c20'
             '60977c1d98d6dbe951b1fb5b9625a0064749399f3f8c2d0e041673add0c94539'
@@ -59,7 +59,7 @@ sha256sums=('a53dbe3f41491922a61f17c5cc551e88f544d5411aeb1c8c65c402795c4f4da0'
             'SKIP')
 b2sums=('44fa5ec3e5471d33171830e8890f41118daa27f10eedb8dd0fe57250463a596a6fdefbc0ee68d8afab252e7635c9ca9eb3009b1849442e3f6de6231f47d1d7df'
         'SKIP'
-        '5623c0079397f677d87aa95c7f563c18e179aba004f89a1984952ac56b0d352a65823213805a77aaf6a5832e5779a2dbdb3142ec8eb78e2a3520ce5456a442f3'
+        '94994f88694d5b520f21b0429904b4f6edc5ccf61c04b9aad7295397329ed98c077c4acfcd41b6c2b4fe947d7da74c71732a49708cf1bf1471d6b701929646a7'
         'SKIP'
         'fd8a2586f05cf3e458c4eeec03fbe320f8c0e0d7ffa6f3c97f6fcecb1a1bf988a3a2dd2e4db3f704c5f752508a0c14ddf7f07caffa5ac1c7a5c144c8e77ebd90'
         '32755c430a1918ddedf743473cb7a162c1f2bd6d6b4281a2ddfafb696649ebbb7af75714a9b2d84e44b40558354c2d795247355bee409ecaf2bdb89351418e23'
