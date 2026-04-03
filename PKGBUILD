@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-my-hardened
-pkgver=6.19.9.arch1
+pkgver=6.19.11.arch1
 pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
@@ -11,9 +11,13 @@ arch=(
 license=(GPL-2.0-only)
 makedepends=(
   bc
+  binutils
   cpio
   gettext
+  glibc
   libelf
+  libgcc
+  openssl
   pahole
   perl
   python
@@ -21,7 +25,10 @@ makedepends=(
   rust-bindgen
   rust-src
   tar
+  xxhash
   xz
+  zlib
+  zstd
 
   # htmldocs
   graphviz
@@ -50,25 +57,25 @@ validpgpkeys=(
   647F28654894E3BD457199BE38DBBDC86092693E  # Greg Kroah-Hartman
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
-
-sha256sums=('c16068a3af12e3943dee3b1eef57ca70229c069128bfa1184fb3f48b219d55bf'
+# https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
+sha256sums=('20039d7b6b256c08be2f8fac43c3ff9a620308c703c643cf2f80c3910b9bd59b'
             'SKIP'
-            'dacb94dc3be57fc442995a3d3d1519775d3f6877a4e2fec437223d95e318f04b'
+            '3870301a5afec914900612e99cd499dac775d059ea52cee9c6eafc3853b995f1'
             'SKIP'
             '60977c1d98d6dbe951b1fb5b9625a0064749399f3f8c2d0e041673add0c94539'
             '0849844663fdedec11a93bd2a30e0639fb26d28eb2135f7527829aad8441e109'
             '8cdfd0bae12383a3f55194f4964d8925d6be401a192ee0486397ec372b395804'
             'SKIP')
-sha256sums_x86_64=('2f81c9789cca5be9c6f071d890df29d3daee124ef8fdb06e9ae44d64e1ac630c')
-b2sums=('6be41037c5b18e9a8d1c58fdd613e37bb5c841b7f43baf95516f3dda461adc6eb20da03e6a8892bd5b8410125ad42dae8ef4634a0eb95b84aaf3882a6ed00074'
+sha256sums_x86_64=('90d88d4fe21dd48d188ce1226601e8a4efca8f6318c75340dbdd37cee5d910ce')
+b2sums=('7304717954b8ad9eec54071d28d2d6c9af108d2c84686cee9b401e38078d4b39810541a854e458c85349de10959d96edb2ba7e38b0e0a7ebc46949e69e7816b3'
         'SKIP'
-        'edc6d11f32f16a53e520b53b52be690d192c0a64153419cbba65e4a2c0f426ce76ab2c10dbddd7f82f2c407c071039b05018796cf2b8ba501d46e3a259146ced'
+        'ac650a52c9097c0fa275742ff56add141677cfe8fe4c8459151eba73991a65c9bfdd072b5f9f139c7167352ec03d71562c5567b72f80ab00ccda5fac5b406b1e'
         'SKIP'
         '32755c430a1918ddedf743473cb7a162c1f2bd6d6b4281a2ddfafb696649ebbb7af75714a9b2d84e44b40558354c2d795247355bee409ecaf2bdb89351418e23'
         '55457aecd7c4330899857d3734de945eed040449f70b2ec2f42ae844b570b40609c07f5e22dcaddabf42d382eb8edcba33abe2309138f465caa1dec7785f6cb3'
         '59b28721049bbc719f97cc3003d09ae3d3a77595d9eba2467e028d00cdb6ec4695bac84c78110d9b71cf5988439c6e3fcea4efd7fbd9f84fa9fa706f31d8c17a'
         'SKIP')
-b2sums_x86_64=('b9f50eb211e49bba0ba4223d7a1e9401022e9de6bdf00a66edb8e73cdfe2c679606ae55df806af0b46022d4439e19ec2855d1ceba5ad825e2a66f7e2ac61d6ad')
+b2sums_x86_64=('8542e725f61fa38914b4a57b1e29774be3b553d6c123f177ea27055aa445216216cf9ba23b5daccb0c5c62ff90ddf4b1d8c16e70c9b5cdc734367d3f925ade8b')
 
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
 
@@ -166,7 +173,17 @@ _package() {
 
 _package-headers() {
   pkgdesc="Headers and scripts for building modules for the $pkgdesc kernel"
-  depends=(pahole)
+  depends=(
+    binutils
+    glibc
+    libelf
+    libgcc
+    openssl
+    pahole
+    xxhash
+    zlib
+    zstd
+  )
   provides=(LINUX-HEADERS)
 
   cd $_srcname
