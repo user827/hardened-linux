@@ -127,7 +127,7 @@ build() {
   ../kconfig-hardened-check/bin/kernel-hardening-checker -c .config -m show_fail | tee hardened_fails
 
   make all
-  make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
+  #make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
   #wait $pid_docs
 }
 
