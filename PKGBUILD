@@ -1,8 +1,8 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-my-hardened
-pkgver=7.1.3.arch1
-pkgrel=2
+pkgver=7.1.4.arch1
+pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
 arch=(
@@ -58,24 +58,24 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v7.x/sha256sums.asc
-sha256sums=('be41c068e88f5242a19bccdbffbe077b18c47b45f627e2325504b4fab79dd1dc'
+sha256sums=('1c63922a119675d38e3ae0f8f6ee07f15c41a786ab9ed66563749bb8c9a08e2e'
             'SKIP'
-            '861ea54a40c1d25296422fd48eac2e02b46e0071b3d99a6c28555ae3acc8edd7'
+            '81545d08b85442bbb0e660f0bd4b2bb237afe87d207231156c742cf588522f7b'
             'SKIP'
             '60977c1d98d6dbe951b1fb5b9625a0064749399f3f8c2d0e041673add0c94539'
             '0849844663fdedec11a93bd2a30e0639fb26d28eb2135f7527829aad8441e109'
             '8cdfd0bae12383a3f55194f4964d8925d6be401a192ee0486397ec372b395804'
             'SKIP')
-sha256sums_x86_64=('2934973cbe5f727ae8e7b7c95af0a11766a3a541b9741e80690c64edcebb3856')
-b2sums=('b6466e2798627522f0339c670a223b21266f4d4ede39163867c0f122295e54c5d24093abb51d5c6c6c917de0cb199836e81f45f7c391a5cc138cac2a519438e8'
+sha256sums_x86_64=('c80b1509f8060ecf23045c63450bac678cdf0c1846948bf842e7b7c02bcb5537')
+b2sums=('bb2b7d559325ce4138c46ad286335725b215ea2049e784efb55547bd3ff7883e508d2ef8c2fe20048b1a3b524e30b231fd06e5e81136a9e3a626e89e0a804628'
         'SKIP'
-        'b402dbf0b29131c2c3fe80406c5560e3e1a5c1384d6a1ba670793b343d57300ec312da7d3a4f7b3f44a6615b015d7fbebb2c7df832a99aa0e1941faef0481baa'
+        '7fb742ad1f2a3388cb136fcfaa4dd08112f38b8681e14c913f9ab7ebedbb083b878c29bec3cd194a7b59dcf869f3f6fd3b5de25d74b85014e635c2a8c687b722'
         'SKIP'
         '32755c430a1918ddedf743473cb7a162c1f2bd6d6b4281a2ddfafb696649ebbb7af75714a9b2d84e44b40558354c2d795247355bee409ecaf2bdb89351418e23'
         '55457aecd7c4330899857d3734de945eed040449f70b2ec2f42ae844b570b40609c07f5e22dcaddabf42d382eb8edcba33abe2309138f465caa1dec7785f6cb3'
         '59b28721049bbc719f97cc3003d09ae3d3a77595d9eba2467e028d00cdb6ec4695bac84c78110d9b71cf5988439c6e3fcea4efd7fbd9f84fa9fa706f31d8c17a'
         'SKIP')
-b2sums_x86_64=('dd13430162bf66b196612433799dabf2641d64a5d1baa758a559404538633c3a73ff1e40948b6bf51ce565ddb10e8a9d9723d4b53da0cf7ff3ca29a94da95bb7')
+b2sums_x86_64=('ab2e0d90a2ad82c8adc4ce98e818c7cc60872cde1d295a3f52340996211886a75ec514dda943733eab15f869f3a5b66823d71b56bf5edef4ac21f7066d23bb65')
 
 # https://www.kernel.org/pub/linux/kernel/v7.x/sha256sums.asc
 
@@ -127,7 +127,8 @@ build() {
   ../kconfig-hardened-check/bin/kernel-hardening-checker -c .config -m show_fail | tee hardened_fails
 
   make all
-  #make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
+  make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
+  #wait $pid_docs
 }
 
 _package() {
@@ -235,8 +236,8 @@ _package-headers() {
   echo "Installing KConfig files..."
   find . -name 'Kconfig*' -exec install -Dm644 {} "$builddir/{}" \;
 
-  echo "Installing Rust files..."
   if [[ $(scripts/config -s CONFIG_RUST) = y ]]; then
+    echo "Installing Rust files..."
     install -Dt "$builddir/rust" -m644 rust/*.rmeta
     install -Dt "$builddir/rust" rust/*.so
   fi
